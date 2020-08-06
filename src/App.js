@@ -12,6 +12,7 @@ function App() {
   const [{ user, token },  dispatch ] = useDataLayerValue();
 
   useEffect(() => {
+  
     const hash = getTokenFromUrl();
     window.location.hash = "";
     const _token = hash.access_token;
@@ -38,7 +39,16 @@ function App() {
           playlists: playlists,
         });
       });
+
+      spotify.getPlaylist('37i9dQZF1EpP3RYlmsvLHu').then((response) => {
+        dispatch({
+          type: "SET_DISCOVER_WEEKLY", 
+          discover_weekly: response,
+
+        })
+      });
     
+      
     }
   },[]);
 
